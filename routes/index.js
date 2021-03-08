@@ -116,7 +116,7 @@ router.post('/archive/start', function (req, res) {
 router.post('/archive/startaudio', function (req, res) {
   var json = req.body;
   var sessionId = json.sessionId;
-  opentok.startArchive(sessionId, { name: findRoomFromSessionId(sessionId) hasVideo: false}, function (err, archive) {
+  opentok.startArchive(sessionId, { name: findRoomFromSessionId(sessionId), hasVideo: 'false'}, function (err, archive) {
     if (err) {
       console.error('error in startArchive');
       console.error(err);
