@@ -111,6 +111,24 @@ router.post('/archive/start', function (req, res) {
 });
 
 /**
+ * POST /archive/startaudio
+ */
+router.post('/archive/startaudio', function (req, res) {
+  var json = req.body;
+  var sessionId = json.sessionId;
+  opentok.startArchive(sessionId, { name: findRoomFromSessionId(sessionId) hasVideo: false}, function (err, archive) {
+    if (err) {
+      console.error('error in startArchive');
+      console.error(err);
+      res.status(500).send({ error: 'startArchive error:' + err });
+      return;
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.send(archive);
+  });
+});
+
+/**
  * POST /archive/:archiveId/stop
  */
 router.post('/archive/:archiveId/stop', function (req, res) {
